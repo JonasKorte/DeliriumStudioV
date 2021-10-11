@@ -1,0 +1,11 @@
+QMenu::item 
+{
+    background-color: #5e5e5e;
+    border-color: #5e5e5e;
+}
+
+QMenu::item:pressed 
+{ 
+    background-color: #5b71a0; 
+    border-color: #5b71a0;
+}

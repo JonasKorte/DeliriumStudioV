@@ -1,6 +1,8 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
     <file>res/qts/menuBar.qts</file>
+    <file>res/qts/menu.qts</file>
+
     <file>res/img/logo.png</file>
 </qresource>
 </RCC>

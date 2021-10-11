@@ -2,7 +2,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
-    this->m_currentProjectSaved = true;
+    this->m_currentProjectSaved = false;
 
     this->setWindowTitle("Delirium Studio V");
     this->setWindowState(Qt::WindowState::WindowMaximized);
@@ -70,6 +70,28 @@ void MainWindow::CreateFileMenu()
 {
     QMenu *fileMenu = new QMenu("File", this->m_menuBar);
     fileMenu->setObjectName("_file_menu");
+    QFile fileMenuStyleSheet(":/res/qts/menu.qts");
+    if (fileMenuStyleSheet.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+
+        QTextStream in(&fileMenuStyleSheet);
+
+        QString data = "";
+
+        while (!in.atEnd())
+        {
+            QString line = in.readLine();
+
+            data.append(line);
+            data.append(" ");
+        }
+
+        fileMenu->setStyleSheet(data);
+    }
+    else
+    {
+        std::cerr << "Failed to load stylesheet at qrc:/res/qts/menuBar.qts!" << std::endl;
+    }
 
     QAction *newAction = new QAction("New Project", fileMenu);
     newAction->setShortcuts(QKeySequence::New);
