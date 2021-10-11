@@ -7,7 +7,8 @@ QMenuBar::item
 { 
     padding: 0px 10px; 
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #5e5e5e, stop: 1 #3d3d3d); 
-    color: #efefef 
+    color: #efefef;
+    border: 0px #000000; 
 }
 QMenuBar::item:pressed 
 { 

@@ -10,6 +10,8 @@
 #include <QMessageBox>
 #include <QFile>
 #include <QTextStream>
+#include <QAction>
+#include <QLabel>
 #include <Qt>
 
 class EXPORTED MainWindow : public QMainWindow

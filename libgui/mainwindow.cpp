@@ -70,7 +70,9 @@ void MainWindow::CreateFileMenu()
 {
     QMenu *fileMenu = new QMenu("File", this->m_menuBar);
     fileMenu->setObjectName("_file_menu");
+
     QFile fileMenuStyleSheet(":/res/qts/menu.qts");
+
     if (fileMenuStyleSheet.open(QIODevice::ReadOnly | QIODevice::Text))
     {
 
@@ -90,10 +92,11 @@ void MainWindow::CreateFileMenu()
     }
     else
     {
-        std::cerr << "Failed to load stylesheet at qrc:/res/qts/menuBar.qts!" << std::endl;
+        std::cerr << "Failed to load stylesheet at qrc:/res/qts/menu.qts!" << std::endl;
     }
 
     QAction *newAction = new QAction("New Project", fileMenu);
+
     newAction->setShortcuts(QKeySequence::New);
     newAction->setStatusTip("Creates a new project. Ctrl + N");
 

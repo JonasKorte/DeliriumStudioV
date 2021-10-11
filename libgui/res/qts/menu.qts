@@ -1,11 +1,14 @@
 QMenu::item 
 {
-    background-color: #5e5e5e;
-    border-color: #5e5e5e;
+    background-color: #3d3d3d;
+    border: 1px solid #3d3d3d;
+    color: #efefef;
+    margin: 0px;
+    padding: 5px; 
 }
 
 QMenu::item:pressed 
 { 
-    background-color: #5b71a0; 
-    border-color: #5b71a0;
+    background-color: #5b71a0;
+    border: 1px solid #5b71a0;
 }
