@@ -1,3 +1,8 @@
+QMenu
+{
+    background-color: #3d3d3d
+}
+
 QMenu::item 
 {
     background-color: #3d3d3d;
@@ -5,7 +10,9 @@ QMenu::item
     border-color: #3d3d3d;
     color: #efefef;
     margin: 0px;
-    padding: 5px; 
+    padding: 5px;
+    min-width: 100%;
+    min-height: 20%; 
 }
 
 QMenu::item:hovered 

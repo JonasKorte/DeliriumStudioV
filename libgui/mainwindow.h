@@ -1,5 +1,6 @@
 #pragma once
 #include "api.h"
+#include <resourceloader.h>
 #include <iostream>
 #include <QMainWindow>
 #include <QGridLayout>

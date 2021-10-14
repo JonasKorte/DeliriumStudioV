@@ -24,28 +24,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     this->CreateExportMenu();
     this->CreateHelpMenu();
 
-    QFile menuBarStyleSheet(":/res/qts/menuBar.qts");
-    if (menuBarStyleSheet.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-
-        QTextStream in(&menuBarStyleSheet);
-
-        QString data = "";
-
-        while (!in.atEnd())
-        {
-            QString line = in.readLine();
-
-            data.append(line);
-            data.append(" ");
-        }
-
-        this->m_menuBar->setStyleSheet(data);
-    }
-    else
-    {
-        std::cerr << "Failed to load stylesheet at qrc:/res/qts/menuBar.qts!" << std::endl;
-    }
+    this->m_menuBar->setStyleSheet(ResourceLoader::Load(":/res/qts/menuBar.qts"));
 
     QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect(this->m_menuBar);
 
@@ -70,30 +49,7 @@ void MainWindow::CreateFileMenu()
 {
     QMenu *fileMenu = new QMenu("File", this->m_menuBar);
     fileMenu->setObjectName("_file_menu");
-
-    QFile fileMenuStyleSheet(":/res/qts/menu.qts");
-
-    if (fileMenuStyleSheet.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-
-        QTextStream in(&fileMenuStyleSheet);
-
-        QString data = "";
-
-        while (!in.atEnd())
-        {
-            QString line = in.readLine();
-
-            data.append(line);
-            data.append(" ");
-        }
-
-        fileMenu->setStyleSheet(data);
-    }
-    else
-    {
-        std::cerr << "Failed to load stylesheet at qrc:/res/qts/menu.qts!" << std::endl;
-    }
+    fileMenu->setStyleSheet(ResourceLoader::Load(":/res/qts/menu.qts"));
 
     QAction *newAction = new QAction("New Project", fileMenu);
 
@@ -178,9 +134,16 @@ void MainWindow::CreateNewProject()
 
 int MainWindow::SaveChangesDialog()
 {
-    QMessageBox::StandardButton reply;
+    QMessageBox messageBox;
 
-    reply = QMessageBox::question(this, "Save Project", "Do you want to save changes to the current project?", QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+    messageBox.setIcon(QMessageBox::Warning);
+    messageBox.setText("Do you want to save changes to the current project?");
+    messageBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+    messageBox.setDefaultButton(QMessageBox::Save);
+    messageBox.setWindowTitle("Save Project");
+    messageBox.setStyleSheet(ResourceLoader::Load(":/res/qts/dialog.qts"));
+
+    int reply = messageBox.exec();
 
     if (reply == QMessageBox::Save)
     {
@@ -194,6 +157,8 @@ int MainWindow::SaveChangesDialog()
     {
         return 2;
     }
+
+    return -1;
 }
 
 const char *MainWindow::SaveCurrentProject()

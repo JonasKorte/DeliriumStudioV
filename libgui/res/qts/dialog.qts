@@ -1,0 +1,20 @@
+QMessageBox {
+    background-color: #3d3d3d;
+}
+
+QMessageBox QLabel {
+    color: #efefef;
+}
+
+QMessageBox QPushButton {
+    background-color: #5e5e5e;
+    color: #efefef;
+}
+
+QMessageBox QPushButton:hovered {
+    background-color: #5b71a0;
+}
+
+QMessageBox QPushButton:pressed {
+    background-color: #161616;
+}
