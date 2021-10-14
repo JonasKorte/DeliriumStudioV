@@ -1,0 +1,5 @@
+QToolBar
+{
+    background-color: #3d3d3d;
+    border-width: 0px;
+}

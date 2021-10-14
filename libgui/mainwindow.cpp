@@ -9,13 +9,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     this->setBaseSize(1920, 1080);
     this->setWindowIcon(QIcon(":/res/img/logo.png"));
     this->setObjectName("_main_window");
-
-    this->m_layout = new QGridLayout(this);
-
-    this->setLayout(this->m_layout);
-
     this->m_menuBar = new QMenuBar(this);
     this->m_menuBar->setObjectName("_main_menu_bar");
+
+    this->m_tabWidget = new QTabWidget(this);
+
+    this->setCentralWidget(this->m_tabWidget);
 
     this->CreateFileMenu();
     this->CreateEditMenu();
@@ -36,12 +35,29 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     this->m_menuBar->setGraphicsEffect(shadow);
 
     this->setMenuBar(this->m_menuBar);
+
+    this->m_openViews.push_back(true); // Arrangement Tab
+    this->m_openViews.push_back(true); // Mixer
+    this->m_openViews.push_back(true); // Piano Roll
+
+    this->m_toolBar = new Toolbar(this);
+
+    this->m_toolBar->setStyleSheet(ResourceLoader::Load(":/res/qts/toolBar.qts"));
+
+    this->m_tabWidget->setAutoFillBackground(true);
+
+    this->m_tabWidget->setStyleSheet(ResourceLoader::Load(":/res/qts/tabWidget.qts"));
+
+    this->addToolBar(this->m_toolBar);
+
+    this->CreateViews();
 }
 
 MainWindow::~MainWindow()
 {
     delete (this->m_menuBar);
-    delete (this->m_layout);
+    delete (this->m_toolBar);
+    delete (this->m_tabWidget);
     QMainWindow::~QMainWindow();
 }
 
@@ -112,6 +128,7 @@ void MainWindow::NewProjectClicked()
         if (result == 0)
         {
             std::cout << SaveCurrentProject() << std::endl;
+            this->CreateNewProject();
         }
         else if (result == 1)
         {
@@ -142,23 +159,12 @@ int MainWindow::SaveChangesDialog()
     messageBox.setDefaultButton(QMessageBox::Save);
     messageBox.setWindowTitle("Save Project");
     messageBox.setStyleSheet(ResourceLoader::Load(":/res/qts/dialog.qts"));
+    messageBox.setParent(this);
+    messageBox.setWindowModality(Qt::WindowModal);
 
     int reply = messageBox.exec();
 
-    if (reply == QMessageBox::Save)
-    {
-        return 0;
-    }
-    else if (reply == QMessageBox::Discard)
-    {
-        return 1;
-    }
-    else if (reply == QMessageBox::Cancel)
-    {
-        return 2;
-    }
-
-    return -1;
+    return reply;
 }
 
 const char *MainWindow::SaveCurrentProject()
@@ -175,4 +181,9 @@ const char *MainWindow::SaveCurrentProject()
     this->m_currentProjectSaved = false;
 
     return "Error saving project!";
+}
+
+void MainWindow::CreateViews()
+{
+
 }

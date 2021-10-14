@@ -9,9 +9,10 @@ QMessageBox QLabel {
 QMessageBox QPushButton {
     background-color: #5e5e5e;
     color: #efefef;
+    border-width: 0px;
 }
 
-QMessageBox QPushButton:hovered {
+QMessageBox QPushButton:hover {
     background-color: #5b71a0;
 }
 

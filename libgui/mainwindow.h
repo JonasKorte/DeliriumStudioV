@@ -1,9 +1,12 @@
 #pragma once
 #include "api.h"
-#include <resourceloader.h>
+#include "resourceloader.h"
+#include "views/arrangement.h"
+#include "components/toolbar.h"
 #include <iostream>
+#include <vector>
 #include <QMainWindow>
-#include <QGridLayout>
+#include <QTabWidget>
 #include <QGraphicsDropShadowEffect>
 #include <QMenuBar>
 #include <QAction>
@@ -36,9 +39,14 @@ public:
 
     const char *SaveCurrentProject();
 
+    void CreateViews();
+
 private:
-    QGridLayout *m_layout;
     QMenuBar *m_menuBar;
+    Toolbar* m_toolBar;
+    ArrangementView* m_arrangement;
+    std::vector<bool> m_openViews;
+    QTabWidget* m_tabWidget;
 
     bool m_currentProjectSaved;
 };

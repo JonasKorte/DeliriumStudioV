@@ -14,7 +14,7 @@ find_package(Qt6 COMPONENTS Widgets Gui Core Qml Quick REQUIRED)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
-set (SOURCES mainwindow.h mainwindow.cpp resourceloader.h resourceloader.cpp api.h)
+set (SOURCES mainwindow.h mainwindow.cpp resourceloader.h resourceloader.cpp views/arrangement.h views/arrangement.cpp components/toolbar.h components/toolbar.cpp api.h)
 
 link_libraries(Qt6::Widgets Qt6::Core Qt6::Gui Qt6::Qml Qt6::Quick)
 
